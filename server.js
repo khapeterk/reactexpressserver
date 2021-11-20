@@ -18,13 +18,9 @@ mongoose
 
     app.use(express.static(path.join(__dirname, 'build')));
 
-    app.get('/api/test', async (req, res, next) => {
-      try {
+    app.get('/api/test', async (req, res) => {
         const test = await testModel.find();
         res.send(test);
-      } catch (error) {
-        next(error);
-      }
     })
 
     app.get('/api/count', (req, res) => {
