@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dotenv = require('dotenv');
 const path = require('path');
+var cors = require('cors');
 
 dotenv.config();
 const app = express();
@@ -10,6 +11,9 @@ const app = express();
 mongoose
   .connect(process.env.DB_URL, {useNewURLParser: true})
   .then(() => {
+
+    app.use(cors());
+
     const testSchema = mongoose.Schema({
       key: String
     })
