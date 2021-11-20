@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 mongoose
-  .connect('mongodb+srv://2wjNtvZfN4RrXSFv51:g4N^nw1FJXzx^YDtJT@cluster0.cgal7.mongodb.net/testdb?retryWrites=true&w=majority', {useNewURLParser: true})
+  .connect(process.env.DB_URL, {useNewURLParser: true})
   .then(() => {
 
     app.use(cors());
@@ -23,9 +23,7 @@ mongoose
     app.use(express.static(path.join(__dirname, 'build')));
 
     app.get('/api/test', async (req, res) => {
-        console.log('/api/test');
         const test = await testModel.find();
-        console.log(test);
         res.send(test);
     })
 
