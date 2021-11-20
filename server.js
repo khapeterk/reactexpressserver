@@ -19,7 +19,7 @@ mongoose
     app.use(express.static(path.join(__dirname, 'build')));
 
     app.get('/api/test', async (req, res) => {
-        const test = await testModel.find();
+        const test = await testModel.find({key: 'value'});
         res.send(test);
     })
 
