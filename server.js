@@ -18,10 +18,6 @@ mongoose
 
     app.use(express.static(path.join(__dirname, 'build')));
 
-    app.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    });
-
     app.get('/api/test', async (req, res, next) => {
       try {
         const test = await testModel.find();
@@ -37,6 +33,10 @@ mongoose
       fs.writeFileSync('count.txt', count);
       res.send('Count file has been visited ' + count + ' times');
     })
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
     
     const port = process.env.PORT || 5000;
     app.listen(port);
