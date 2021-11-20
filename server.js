@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const dotenv = require('dotenv');
 const path = require('path');
-var cors = require('cors');
+const cors = require('cors');
 
 dotenv.config();
 const app = express();
@@ -23,7 +23,7 @@ mongoose
     app.use(express.static(path.join(__dirname, 'build')));
 
     app.get('/api/test', async (req, res) => {
-        const test = await testModel.find({key: 'value'});
+        const test = await testModel.find();
         res.send(test);
     })
 
