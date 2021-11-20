@@ -1,11 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
+const dotenv = require('dotenv');
 const path = require('path');
+
+dotenv.config();
 const app = express();
 
 mongoose
-  .connect('mongodb+srv://2wjNtvZfN4RrXSFv51:g4N^nw1FJXzx^YDtJT@cluster0.cgal7.mongodb.net/testdb?retryWrites=true&w=majority', {useNewURLParser: true})
+  .connect(process.env.DB_URL, {useNewURLParser: true})
   .then(() => {
     const testSchema = mongoose.Schema({
       key: String
@@ -31,6 +34,6 @@ mongoose
       res.send('Count file has been visited ' + count + ' times');
     })
     
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 5000;
     app.listen(port);
   })
