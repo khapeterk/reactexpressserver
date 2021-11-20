@@ -22,9 +22,13 @@ mongoose
       res.sendFile(path.join(__dirname, 'build', 'index.html'));
     });
 
-    app.get('/api/test', async (req, res) => {
-      const test = await testModel.find();
-      res.send(test);
+    app.get('/api/test', async (req, res, next) => {
+      try {
+        const test = await testModel.find();
+        res.send(test);
+      } catch (error) {
+        next(error);
+      }
     })
 
     app.get('/api/count', (req, res) => {
